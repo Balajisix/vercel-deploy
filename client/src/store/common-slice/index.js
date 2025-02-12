@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const BACKEND_URL = "https://backend-api-ten-sigma.vercel.app";
 
 const initialState = {
   isLoading: false,
@@ -10,7 +11,7 @@ export const getFeatureImages = createAsyncThunk(
   "/order/getFeatureImages",
   async () => {
     const response = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/common/feature/get`
+      `${BACKEND_URL}/api/common/feature/get`
     );
 
     return response.data;
@@ -21,7 +22,7 @@ export const addFeatureImage = createAsyncThunk(
   "/order/addFeatureImage",
   async (image) => {
     const response = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/common/feature/add`,
+      `${BACKEND_URL}/api/common/feature/add`,
       { image }
     );
 

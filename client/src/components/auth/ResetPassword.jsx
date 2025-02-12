@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Lock } from 'lucide-react';
 import axios from 'axios';
+const BACKEND_URL = "https://backend-api-ten-sigma.vercel.app";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -26,7 +27,7 @@ const ResetPassword = () => {
     setIsLoading(true);
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/api/auth/reset-password/${token}`,
+        `${BACKEND_URL}/api/auth/reset-password/${token}`,
         { newPassword }
       );
       if (response.status === 200) {

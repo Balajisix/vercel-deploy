@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Gift, Mail } from 'lucide-react';
 import axios from 'axios';
+const BACKEND_URL = "https://backend-api-ten-sigma.vercel.app";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const ForgotPassword = () => {
 
     // API Call for Password Reset using axios
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/reset-password`, {
+      const response = await axios.post(`${BACKEND_URL}/api/auth/reset-password`, {
         email,
       });
 

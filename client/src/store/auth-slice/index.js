@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const BACKEND_URL = "https://backend-api-ten-sigma.vercel.app";
 
 const initialState = {
   isAuthenticated: false,
@@ -12,7 +13,7 @@ export const registerUser = createAsyncThunk(
 
   async (formData) => {
     const response = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/auth/register`,
+      `${BACKEND_URL}/api/auth/register`,
       formData,
       {
         withCredentials: true,
@@ -28,7 +29,7 @@ export const loginUser = createAsyncThunk(
 
   async (formData) => {
     const response = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`,
+      `${BACKEND_URL}/api/auth/login`,
       formData,
       {
         withCredentials: true,
@@ -44,7 +45,7 @@ export const logoutUser = createAsyncThunk(
 
   async () => {
     const response = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/auth/logout`,
+      `${BACKEND_URL}/api/auth/logout`,
       {},
       {
         withCredentials: true,
@@ -60,7 +61,7 @@ export const checkAuth = createAsyncThunk(
 
   async () => {
     const response = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/auth/check-auth`,
+      `${BACKEND_URL}/api/auth/check-auth`,
       {
         withCredentials: true,
         headers: {

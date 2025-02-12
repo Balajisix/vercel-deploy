@@ -1,5 +1,18 @@
 {
   "rewrites": [
-    { "source": "/shop/paypal-return", "destination": "/index.html" }
+    { "source": "/api/:path*", "destination": "https://backend-api-ten-sigma.vercel.app/api/:path*" }
+  ],
+  "redirects": [
+    { "source": "/shop/paypal-return", "destination": "/", "statusCode": 200 }
+  ],
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With, Content-Type, Authorization" }
+      ]
+    }
   ]
 }

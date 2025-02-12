@@ -27,7 +27,7 @@ const ForgotPasswordEmail = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/auth/reset-password/${token}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/auth/reset-password/${token}`,
         { newPassword }
       );
       if (response.status === 200) {

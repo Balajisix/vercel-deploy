@@ -2,6 +2,7 @@ const paypal = require("../../helpers/paypal");
 const Order = require("../../models/Order");
 const Cart = require("../../models/Cart");
 const Product = require("../../models/Product");
+const FRONTEND_URL = "https://swweet-surprises.vercel.app"
 
 const createOrder = async (req, res) => {
   try {
@@ -26,8 +27,8 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "https://swweet-surprises.vercel.app/shop/paypal-return",
-        cancel_url: "https://swweet-surprises.vercel.app/shop/paypal-cancel",
+        return_url: `${FRONTEND_URL}/shop/paypal-return`,
+        cancel_url: `${FRONTEND_URL}/shop/paypal-cancel`,
       },
       transactions: [
         {

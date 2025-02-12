@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/shop/paypal-return", "destination": "/index.html" }
+  ]
+}

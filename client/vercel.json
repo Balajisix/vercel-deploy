@@ -1,9 +1,17 @@
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://backend-api-ten-sigma.vercel.app/api/:path*" }
-  ],
-  "redirects": [
-    { "source": "/shop/paypal-return", "destination": "/", "statusCode": 200 }
+    {
+      "source": "/api/:path*",
+      "destination": "https://backend-api-ten-sigma.vercel.app/api/:path*"
+    },
+    {
+      "source": "/shop/paypal-return",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {

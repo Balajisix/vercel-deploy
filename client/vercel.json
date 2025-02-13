@@ -6,7 +6,7 @@
     },
     {
       "source": "/shop/paypal-return",
-      "destination": "/index.html"
+      "destination": "/shop/paypal-return"
     },
     {
       "source": "/:path*",

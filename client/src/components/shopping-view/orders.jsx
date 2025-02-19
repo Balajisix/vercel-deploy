@@ -37,40 +37,40 @@ function ShoppingOrders() {
     if (orderDetails !== null) setOpenDetailsDialog(true);
   }, [orderDetails]);
 
-  console.log(orderDetails, "orderDetails");
-
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Order History</CardTitle>
+        <CardTitle className="text-lg sm:text-xl">Order History</CardTitle>
       </CardHeader>
       <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Order ID</TableHead>
-              <TableHead>Order Date</TableHead>
-              <TableHead>Order Status</TableHead>
-              <TableHead>Order Price</TableHead>
-              <TableHead>
-                <span className="sr-only">Details</span>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {orderList && orderList.length > 0
-              ? orderList.map((orderItem) => (
-                  <TableRow>
+        {/* Make Table Responsive */}
+        <div className="overflow-x-auto">
+          <Table className="min-w-[600px] w-full">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="whitespace-nowrap">Order ID</TableHead>
+                <TableHead className="whitespace-nowrap">Order Date</TableHead>
+                <TableHead className="whitespace-nowrap">Order Status</TableHead>
+                <TableHead className="whitespace-nowrap">Order Price</TableHead>
+                <TableHead className="whitespace-nowrap">
+                  <span className="sr-only">Details</span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {orderList && orderList.length > 0 ? (
+                orderList.map((orderItem) => (
+                  <TableRow key={orderItem?._id}>
                     <TableCell>{orderItem?._id}</TableCell>
                     <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
                     <TableCell>
                       <Badge
-                        className={`py-1 px-3 ${
+                        className={`py-1 px-3 text-white ${
                           orderItem?.orderStatus === "delivered"
                             ? "bg-green-500"
                             : orderItem?.orderStatus === "rejected"
                             ? "bg-red-600"
-                            : "bg-black"
+                            : "bg-gray-700"
                         }`}
                       >
                         {orderItem?.orderStatus}
@@ -86,9 +86,8 @@ function ShoppingOrders() {
                         }}
                       >
                         <Button
-                          onClick={() =>
-                            handleFetchOrderDetails(orderItem?._id)
-                          }
+                          className="text-sm sm:text-base"
+                          onClick={() => handleFetchOrderDetails(orderItem?._id)}
                         >
                           View Details
                         </Button>
@@ -97,9 +96,16 @@ function ShoppingOrders() {
                     </TableCell>
                   </TableRow>
                 ))
-              : null}
-          </TableBody>
-        </Table>
+              ) : (
+                <TableRow>
+                  <TableCell colSpan="5" className="text-center text-gray-500">
+                    No Orders Found
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </CardContent>
     </Card>
   );

@@ -5,7 +5,7 @@
       "destination": "https://backend-api-ten-sigma.vercel.app/api/:path*"
     },
     {
-      "source": "/shop/paypal-return",
+      "source": "/shop/paypal-return/:path*",
       "destination": "/shop/paypal-return"
     },
     {

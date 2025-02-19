@@ -104,7 +104,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
 
       return (
         <Dialog open={open} onOpenChange={handleDialogClose}>
-          <DialogContent className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 max-w-[95vw] md:max-w-[80vw] lg:max-w-[70vw] bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg shadow-xl">
+          <DialogContent 
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 
+            max-w-[95vw] md:max-w-[80vw] lg:max-w-[70vw] 
+            max-h-[90vh] overflow-y-auto bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg shadow-xl"
+          >
             
             {/* Product Image */}
             <div className="relative overflow-hidden rounded-lg">
@@ -176,7 +180,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
               <Separator className="my-6" />
     
               {/* Review Section */}
-              <div className="max-h-[300px] overflow-auto">
+              <div className="max-h-[300px] overflow-y-auto">
                 <h2 className="text-xl font-bold mb-4 text-pink-700">Reviews</h2>
                 <div className="space-y-4">
                   {reviews?.length > 0 ? (

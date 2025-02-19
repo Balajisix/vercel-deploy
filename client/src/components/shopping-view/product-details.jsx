@@ -102,141 +102,128 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
         reviews.length
       : 0;
 
-  return (
-    <Dialog open={open} onOpenChange={handleDialogClose}>
-      <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw] bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg shadow-xl">
-        {/* Product Image */}
-        <div className="relative overflow-hidden rounded-lg">
-          <img
-            src={productDetails?.image}
-            alt={productDetails?.title}
-            width={600}
-            height={600}
-            className="aspect-square w-full object-cover rounded-lg transform transition duration-500 hover:scale-110"
-          />
-        </div>
-
-        {/* Product Details */}
-        <div className="">
-          <div>
-            <h1 className="text-3xl font-extrabold text-pink-700">{productDetails?.title}</h1>
-            <p className="text-pink-500 text-2xl mb-5 mt-4">
-              {productDetails?.description}
-            </p>
-          </div>
-          <div className="flex items-center justify-between">
-            <p
-              className={`text-3xl font-bold text-pink-700 ${
-                productDetails?.salePrice > 0 ? "line-through" : ""
-              }`}
-            >
-              ₹{productDetails?.price}
-            </p>
-            {productDetails?.salePrice > 0 ? (
-              <p className="text-2xl font-bold text-green-600">
-                ₹{productDetails?.salePrice}
-              </p>
-            ) : null}
-          </div>
-          <div className="flex items-center gap-2 mt-2">
-            <div className="flex items-center gap-0.5">
-              <StarRatingComponent rating={averageReview} />
-            </div>
-            <span className="text-muted-foreground">
-              ({averageReview.toFixed(2)})
-            </span>
-          </div>
-          
-          {/* Gift Wrapping Checkbox */}
-          <div className="flex items-center gap-2 mt-4">
-            <input
-              type="checkbox"
-              id="giftWrap"
-              checked={isGiftWrapped}
-              onChange={() => setIsGiftWrapped(!isGiftWrapped)}
-              className="w-5 h-5 accent-pink-500"
-            />
-            <label htmlFor="giftWrap" className="text-pink-700 text-lg">
-              Add Gift Wrapping
-            </label>
-          </div>
-
-          <div className="mt-5 mb-5">
-            {productDetails?.totalStock === 0 ? (
-              <Button className="w-full opacity-60 cursor-not-allowed bg-gray-300 text-white">
-                Out of Stock
-              </Button>
-            ) : (
-              <Button
-                className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md hover:shadow-xl"
-                onClick={() =>
-                  handleAddToCart(
-                    productDetails?._id,
-                    productDetails?.totalStock
-                  )
-                }
-              >
-                Add to Cart
-              </Button>
-            )}
-          </div>
-          <Separator />
-          {/* Review Section */}
-          <div className="max-h-[300px] overflow-auto">
-            <h2 className="text-xl font-bold mb-4 text-pink-700">Reviews</h2>
-            <div className="grid gap-6">
-              {reviews && reviews.length > 0 ? (
-                reviews.map((reviewItem, index) => (
-                  <div className="flex gap-4" key={index}>
-                    <Avatar className="w-10 h-10 border">
-                      <AvatarFallback>
-                        {reviewItem?.userName[0].toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="grid gap-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-bold">{reviewItem?.userName}</h3>
-                      </div>
-                      <div className="flex items-center gap-0.5">
-                        <StarRatingComponent rating={reviewItem?.reviewValue} />
-                      </div>
-                      <p className="text-muted-foreground">
-                        {reviewItem.reviewMessage}
-                      </p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <h1>No Reviews</h1>
-              )}
-            </div>
-            <div className="mt-10 flex-col flex gap-2">
-              <Label className="text-pink-700">Write a review</Label>
-              <div className="flex gap-1">
-                <StarRatingComponent
-                  rating={rating}
-                  handleRatingChange={handleRatingChange}
-                />
-              </div>
-              <Input
-                name="reviewMsg"
-                value={reviewMsg}
-                onChange={(event) => setReviewMsg(event.target.value)}
-                placeholder="Write a review..."
+      return (
+        <Dialog open={open} onOpenChange={handleDialogClose}>
+          <DialogContent className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 max-w-[95vw] md:max-w-[80vw] lg:max-w-[70vw] bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg shadow-xl">
+            
+            {/* Product Image */}
+            <div className="relative overflow-hidden rounded-lg">
+              <img
+                src={productDetails?.image}
+                alt={productDetails?.title}
+                width={600}
+                height={600}
+                className="aspect-square w-full object-cover rounded-lg transition-transform duration-500 hover:scale-105"
               />
-              <Button
-                className="bg-pink-500 hover:bg-pink-600 text-white"
-                onClick={handleAddReview}
-                disabled={reviewMsg.trim() === ""}
-              >
-                Submit
-              </Button>
             </div>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-export default ProductDetailsDialog;
+    
+            {/* Product Details */}
+            <div className="flex flex-col">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-pink-700">
+                {productDetails?.title}
+              </h1>
+              <p className="text-pink-600 text-lg sm:text-xl mt-3 mb-5">
+                {productDetails?.description}
+              </p>
+    
+              <div className="flex items-center justify-between">
+                <p className={`text-2xl sm:text-3xl font-bold text-pink-700 ${productDetails?.salePrice > 0 ? "line-through" : ""}`}>
+                  ₹{productDetails?.price}
+                </p>
+                {productDetails?.salePrice > 0 && (
+                  <p className="text-2xl font-bold text-green-600">
+                    ₹{productDetails?.salePrice}
+                  </p>
+                )}
+              </div>
+    
+              {/* Rating */}
+              <div className="flex items-center gap-2 mt-2">
+                <StarRatingComponent rating={averageReview} />
+                <span className="text-gray-600">({averageReview.toFixed(2)})</span>
+              </div>
+    
+              {/* Gift Wrapping Checkbox */}
+              <div className="flex items-center gap-2 mt-4">
+                <input
+                  type="checkbox"
+                  id="giftWrap"
+                  checked={isGiftWrapped}
+                  onChange={() => setIsGiftWrapped(!isGiftWrapped)}
+                  className="w-5 h-5 accent-pink-500"
+                />
+                <label htmlFor="giftWrap" className="text-pink-700 text-lg">
+                  Add Gift Wrapping
+                </label>
+              </div>
+    
+              {/* Add to Cart Button */}
+              <div className="mt-6">
+                {productDetails?.totalStock === 0 ? (
+                  <Button className="w-full opacity-60 cursor-not-allowed bg-gray-300 text-white">
+                    Out of Stock
+                  </Button>
+                ) : (
+                  <Button
+                    className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md hover:shadow-lg"
+                    onClick={() => handleAddToCart(productDetails?._id, productDetails?.totalStock)}
+                  >
+                    Add to Cart
+                  </Button>
+                )}
+              </div>
+    
+              <Separator className="my-6" />
+    
+              {/* Review Section */}
+              <div className="max-h-[300px] overflow-auto">
+                <h2 className="text-xl font-bold mb-4 text-pink-700">Reviews</h2>
+                <div className="space-y-4">
+                  {reviews?.length > 0 ? (
+                    reviews.map((reviewItem, index) => (
+                      <div className="flex gap-4" key={index}>
+                        <Avatar className="w-10 h-10 border">
+                          <AvatarFallback>
+                            {reviewItem?.userName[0].toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="space-y-1">
+                          <h3 className="font-bold">{reviewItem?.userName}</h3>
+                          <StarRatingComponent rating={reviewItem?.reviewValue} />
+                          <p className="text-gray-600">{reviewItem.reviewMessage}</p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-600">No Reviews</p>
+                  )}
+                </div>
+    
+                {/* Add Review */}
+                <div className="mt-6 flex flex-col gap-2">
+                  <Label className="text-pink-700">Write a review</Label>
+                  <div className="flex gap-1">
+                    <StarRatingComponent rating={rating} handleRatingChange={handleRatingChange} />
+                  </div>
+                  <Input
+                    name="reviewMsg"
+                    value={reviewMsg}
+                    onChange={(event) => setReviewMsg(event.target.value)}
+                    placeholder="Write a review..."
+                  />
+                  <Button
+                    className="bg-pink-500 hover:bg-pink-600 text-white"
+                    onClick={handleAddReview}
+                    disabled={reviewMsg.trim() === ""}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      );
+    };
+    
+    export default ProductDetailsDialog;
